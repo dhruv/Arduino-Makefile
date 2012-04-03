@@ -34,6 +34,14 @@ Some details on the addition of chipKIT support can be found in another
 
 [docs]: http://mjo.tc/atelier/2009/02/arduino-cli.html
 
+## Commands
+
+### Serial Monitor
+
+If you have minicom installed, you can run `make monitor` to open the serial
+output. You can use a different serial monitoring tool (e.g. screen) by
+overriding the `SERIAL_MONITOR_BINARY` and `SERIAL_MONITOR_FLAGS` variables.
+
 ## Contributors
 
 * Martin Oldfield (initial version)

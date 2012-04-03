@@ -564,6 +564,26 @@ endif
 
 AVRDUDE_ISP_OPTS = -P $(ISP_PORT) $(ISP_PROG)
 
+#######################################################################
+#
+# Serial monitoring
+#
+
+ifndef SERIAL_MONITOR_BAUDRATE
+SERIAL_MONITOR_BAUDRATE = 9600
+endif
+
+ifndef SERIAL_MONITOR_BINARY
+SERIAL_MONITOR_BINARY = minicom
+endif
+
+ifndef SERIAL_MONITOR_FLAGS
+SERIAL_MONITOR_FLAGS = -b $(SERIAL_MONITOR_BAUDRATE) -D $(ARDUINO_PORT)
+endif
+
+ifndef SERIAL_MONITOR_COMMAND
+SERIAL_MONITOR_COMMAND = $(SERIAL_MONITOR_BINARY) $(SERIAL_MONITOR_FLAGS)
+endif
 
 ########################################################################
 #
@@ -620,6 +640,9 @@ depends:	$(DEPS)
 
 size:		$(OBJDIR) $(TARGET_HEX)
 		$(SIZE) $(TARGET_HEX)
+
+monitor:
+	$(SERIAL_MONITOR_COMMAND)
 
 show_boards:	
 	@cat $(BOARDS_TXT) | grep -E "^[[:alnum:]]" | cut -d . -f 1 | uniq
