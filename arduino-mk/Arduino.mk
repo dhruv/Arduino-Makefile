@@ -232,8 +232,22 @@ ifndef ARDUINO_VAR_PATH
 ARDUINO_VAR_PATH  = $(ARDUINO_DIR)/hardware/arduino/variants
 endif
 
+ifndef ARDUINO_PREFERENCES_PATH
+
+ifeq ($(OSTYPE),Linux)
+ARDUINO_PREFERENCES_PATH = $(HOME)/.arduino/preferences.txt
+else
+ARDUINO_PREFERENCES_PATH = $(HOME)/Library/Arduino/preferences.txt
+endif
+
+endif
+
+ifeq ($(wildcard $(ARDUINO_PREFERENCES_PATH)),)
+$(error "Error: run the IDE once to initialize preferences sketchbook path")
+endif
+
 ifndef ARDUINO_SKETCHBOOK
-ARDUINO_SKETCHBOOK = $(HOME)/sketchbook
+ARDUINO_SKETCHBOOK = $(shell grep sketchbook.path $(wildcard $(ARDUINO_PREFERENCES_PATH)) | cut -d = -f 2)
 endif
 
 ifndef USER_LIB_PATH
