@@ -42,6 +42,14 @@ If you have minicom installed, you can run `make monitor` to open the serial
 output. You can use a different serial monitoring tool (e.g. screen) by
 overriding the `SERIAL_MONITOR_BINARY` and `SERIAL_MONITOR_FLAGS` variables.
 
+## Options
+
+If you are defining your own `main()` function, you can stop the Ardunio's
+built-in `main()` from being compiled with your code by defining the
+`NO_CORE_MAIN_FUNCTION` variable:
+
+    NO_CORE_MAIN_FUNCTION = 1
+
 ## Contributors
 
 * Martin Oldfield (initial version)
