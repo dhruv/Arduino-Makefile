@@ -326,10 +326,6 @@ ifndef BOARD
 BOARD = $(call PARSE_BOARD,$(BOARD_TAG),board)
 endif
 
-ifndef LDSCRIPT
-LDSCRIPT = $(call PARSE_BOARD,$(BOARD_TAG),ldscript)
-endif
-
 # Everything gets built in here
 OBJDIR  	  = build-cli
 
